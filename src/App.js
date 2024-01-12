@@ -10,13 +10,14 @@ const App = () => {
 
     // Start the timer
     const startTimer = () => {
-        if (!isRunning) {
-            setIsRunning(true);
-            timerRef.current = setInterval(() => {
-                setTimeLeft(prev => prev - 1);
-            }, 1000);
-        }
-    };
+      if (!isRunning) {
+          setIsRunning(true);
+          timerRef.current = setInterval(() => {
+              setTimeLeft(prev => Math.max(prev - 1, 0));
+          }, 1000);
+      }
+  };
+  
 
     // Stop the timer
     const stopTimer = () => {
@@ -67,64 +68,67 @@ const App = () => {
         if (breakLength > 1) setBreakLength(prev => prev - 1);
     };
 
-    // Timer Logic
     useEffect(() => {
-      if (timeLeft === 0) {
-          // Play audio
-          const audio = document.getElementById('beep');
-          audio.play();
-  
-          // Switch between session and break
+      if (isRunning && timeLeft === 0) {
+        const audio = document.getElementById('beep');
+        audio.play();
+    
+        setTimeout(() => {
           if (timerLabel === 'Session') {
-              setTimerLabel('Break');
-              setTimeout(() => setTimeLeft(breakLength * 60), 1);
+            setTimerLabel('Break');
+            setTimeLeft(breakLength * 60);
           } else {
-              setTimerLabel('Session');
-              setTimeout(() => setTimeLeft(sessionLength * 60), 1);
+            setTimerLabel('Session');
+            setTimeLeft(sessionLength * 60);
           }
+        }, 1);
       }
-  }, [timeLeft, sessionLength, breakLength, timerLabel]);
+    }, [isRunning, timeLeft, sessionLength, breakLength, timerLabel]);
+    
+    
 
-    // Format time
-    const formatTime = (time) => {
-        const minutes = Math.floor(time / 60);
-        const seconds = time % 60;
-        return `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-    };
+// Format time
+const formatTime = (time) => {
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+  return `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+};
 
-    return (
-      <div className="app-container">
-          <h1>25 + 5 Clock</h1>
-  
-          <div className="card">
-              <div id="timer-label">{timerLabel}</div>
-              <div id="time-left">{formatTime(timeLeft)}</div>
-  
-              <button id="start_stop" onClick={isRunning ? stopTimer : startTimer}>
-                  {isRunning ? 'Stop' : 'Start'}
-              </button>
-              <button id="reset" onClick={resetTimer}>Reset</button>
-          </div>
-  
-          <div className="card">
-              <div id="break-label">Break Length</div>
-              <div className="control-group">
-                  <button id="break-decrement" onClick={decrementBreak}>-</button>
-                  <div id="break-length">{breakLength}</div>
-                  <button id="break-increment" onClick={incrementBreak}>+</button>
-              </div>
-          </div>
-  
-          <div className="card">
-              <div id="session-label">Session Length</div>
-              <div className="control-group">
-                  <button id="session-decrement" onClick={decrementSession}>-</button>
-                  <div id="session-length">{sessionLength}</div>
-                  <button id="session-increment" onClick={incrementSession}>+</button>
-              </div>
-          </div>
+return (
+    <div className="app-container">
+        <h1>Pomodoro Timer</h1>
+
+        <div className="card">
+            <div id="timer-label">{timerLabel}</div>
+            <div id="time-left">{formatTime(timeLeft)}</div>
+
+            <button id="start_stop" onClick={isRunning ? stopTimer : startTimer}>
+                {isRunning ? 'Stop' : 'Start'}
+            </button>
+            <button id="reset" onClick={resetTimer}>Reset</button>
         </div>
-  );  
+
+        <div className="card">
+            <div id="break-label">Break Length</div>
+            <div className="control-group">
+                <button id="break-decrement" onClick={decrementBreak}>-</button>
+                <div id="break-length">{breakLength}</div>
+                <button id="break-increment" onClick={incrementBreak}>+</button>
+            </div>
+        </div>
+
+        <div className="card">
+            <div id="session-label">Session Length</div>
+            <div className="control-group">
+                <button id="session-decrement" onClick={decrementSession}>-</button>
+                <div id="session-length">{sessionLength}</div>
+                <button id="session-increment" onClick={incrementSession}>+</button>
+            </div>
+        </div>
+
+        <audio id="beep" preload="auto" src="https://example.com/beep.mp3" />
+    </div>
+  );
 };
 
 export default App;
