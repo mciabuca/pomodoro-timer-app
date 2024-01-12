@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-
+import './App.css';
 const App = () => {
     const [sessionLength, setSessionLength] = useState(25);
     const [breakLength, setBreakLength] = useState(5);
@@ -93,30 +93,40 @@ const App = () => {
     };
 
     return (
-        <div>
-            <h1>25 + 5 Clock</h1>
-
-            <div id="timer-label">{timerLabel}</div>
-            <div id="time-left">{formatTime(timeLeft)}</div>
-
-            <button id="start_stop" onClick={isRunning ? stopTimer : startTimer}>
-                {isRunning ? 'Stop' : 'Start'}
-            </button>
-            <button id="reset" onClick={resetTimer}>Reset</button>
-
-            <div id="break-label">Break Length</div>
-            <button id="break-decrement" onClick={decrementBreak}>-</button>
-            <div id="break-length">{breakLength}</div>
-            <button id="break-increment" onClick={incrementBreak}>+</button>
-
-            <div id="session-label">Session Length</div>
-            <button id="session-decrement" onClick={decrementSession}>-</button>
-            <div id="session-length">{sessionLength}</div>
-            <button id="session-increment" onClick={incrementSession}>+</button>
-
-            <audio id="beep" preload="auto" src="https://example.com/beep.mp3" />
-        </div>
-    );
+      <div className="app-container">
+          <h1>25 + 5 Clock</h1>
+  
+          <div className="card">
+              <div id="timer-label">{timerLabel}</div>
+              <div id="time-left">{formatTime(timeLeft)}</div>
+  
+              <button id="start_stop" onClick={isRunning ? stopTimer : startTimer}>
+                  {isRunning ? 'Stop' : 'Start'}
+              </button>
+              <button id="reset" onClick={resetTimer}>Reset</button>
+          </div>
+  
+          <div className="card">
+              <div id="break-label">Break Length</div>
+              <div className="control-group">
+                  <button id="break-decrement" onClick={decrementBreak}>-</button>
+                  <div id="break-length">{breakLength}</div>
+                  <button id="break-increment" onClick={incrementBreak}>+</button>
+              </div>
+          </div>
+  
+          <div className="card">
+              <div id="session-label">Session Length</div>
+              <div className="control-group">
+                  <button id="session-decrement" onClick={decrementSession}>-</button>
+                  <div id="session-length">{sessionLength}</div>
+                  <button id="session-increment" onClick={incrementSession}>+</button>
+              </div>
+          </div>
+  
+          <audio id="beep" preload="auto" src="https://example.com/beep.mp3" />
+      </div>
+  );  
 };
 
 export default App;
