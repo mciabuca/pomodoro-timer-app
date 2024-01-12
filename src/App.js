@@ -69,21 +69,21 @@ const App = () => {
 
     // Timer Logic
     useEffect(() => {
-        if (timeLeft === 0) {
-            // Play audio
-            const audio = document.getElementById('beep');
-            audio.play();
-
-            // Switch between session and break
-            if (timerLabel === 'Session') {
-                setTimerLabel('Break');
-                setTimeLeft(breakLength * 60);
-            } else {
-                setTimerLabel('Session');
-                setTimeLeft(sessionLength * 60);
-            }
-        }
-    }, [timeLeft, sessionLength, breakLength, timerLabel]);
+      if (timeLeft === 0) {
+          // Play audio
+          const audio = document.getElementById('beep');
+          audio.play();
+  
+          // Switch between session and break
+          if (timerLabel === 'Session') {
+              setTimerLabel('Break');
+              setTimeout(() => setTimeLeft(breakLength * 60), 1);
+          } else {
+              setTimerLabel('Session');
+              setTimeout(() => setTimeLeft(sessionLength * 60), 1);
+          }
+      }
+  }, [timeLeft, sessionLength, breakLength, timerLabel]);
 
     // Format time
     const formatTime = (time) => {
@@ -123,9 +123,7 @@ const App = () => {
                   <button id="session-increment" onClick={incrementSession}>+</button>
               </div>
           </div>
-  
-          <audio id="beep" preload="auto" src="https://example.com/beep.mp3" />
-      </div>
+        </div>
   );  
 };
 

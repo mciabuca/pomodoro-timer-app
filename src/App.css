@@ -1,11 +1,11 @@
 /* App.css */
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   background-color: #ff4d4d;
   color: #fff;
   text-align: center;
-  padding: 40px;
+  padding: 20px;
   margin: 0;
   height: 100vh;
   display: flex;
@@ -17,7 +17,6 @@ body {
   width: 100%;
   max-width: 1000px; 
   margin: auto; 
-
   background-color: #ff6666;
   padding: 30px;
   border-radius: 10px;
