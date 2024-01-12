@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/pomodor-timer-app/static/css/main.b1b246e2.css",
+    "main.js": "/pomodor-timer-app/static/js/main.f5db5f61.js",
+    "static/js/787.a7e0c9b0.chunk.js": "/pomodor-timer-app/static/js/787.a7e0c9b0.chunk.js",
+    "index.html": "/pomodor-timer-app/index.html",
+    "main.b1b246e2.css.map": "/pomodor-timer-app/static/css/main.b1b246e2.css.map",
+    "main.f5db5f61.js.map": "/pomodor-timer-app/static/js/main.f5db5f61.js.map",
+    "787.a7e0c9b0.chunk.js.map": "/pomodor-timer-app/static/js/787.a7e0c9b0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b1b246e2.css",
+    "static/js/main.f5db5f61.js"
+  ]
+}
